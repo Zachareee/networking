@@ -1,0 +1,26 @@
+# https://taskfile.dev
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+version: "3"
+
+tasks:
+  venv:
+    generates:
+      - venv/**
+    cmds:
+      - python -m venv venv
+  install:
+    sources:
+      - requirements.txt
+    deps:
+      - install
+    cmds:
+      - venv/Scripts/pip install -r requirements.txt
+    silent: false
+  default:
+    watch: true
+    sources:
+      - src/**
+      - main.py
+    cmds:
+      - venv/Scripts/python src/main.py
