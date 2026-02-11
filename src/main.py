@@ -1,3 +1,4 @@
 from networking.node import Node
+from networking.frames import MAC_frame
 
-print(bytes(Node("hi", "1").send_MAC_frame("yo", "hello thereee")))
+print(MAC_frame.from_bytes(bytes(Node("al", 0x5).rcv_MAC_frame())))
