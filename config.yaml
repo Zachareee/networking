@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=./config-schema.yaml
+
+nodes:
+  N1:
+    MAC: N1
+    IP: 255
+    port: 8000
+
+wires:
+  - nodes:
+      - N1
