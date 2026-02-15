@@ -1,7 +1,7 @@
-from typing import TypeGuard
+from typing import TypeIs
 
-type MACaddr = str
+MACaddr = str
 
 
-def _valid_MAC(MAC: str | MACaddr) -> TypeGuard[MACaddr]:
+def _valid_MAC(MAC: str) -> TypeIs[MACaddr]:
     return isinstance(MAC, str) and len(MAC) == 2
