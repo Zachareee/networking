@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from threading import Thread
 from typing import override
 import socket
 
@@ -23,10 +24,7 @@ class Node:
 
     def send_MAC_frame(self, dst: MACaddr, data: str):
         logger.info(f"sending {data} from {self.MAC} to {dst}")
-        MAC_frame(self.MAC, dst, data)
-
-    def resolve_MAC(self, dst: MACaddr):
-        pass
+        self.__socket.send(bytes(MAC_frame(self.MAC, dst, data)))
 
     @override
     def __init__(self, node_config: NodeConfig):
@@ -34,7 +32,9 @@ class Node:
         self.IP = node_config["IP"]
         (sock, _) = socket.create_server(
             ("127.0.0.1", node_config["port"])).accept()
+        logger.info(f"node {self.MAC} connected to wire")
         self.__socket = sock
+        Thread(target=self.rcv_MAC_frame).start()
 
     def __del__(self):
         self.__socket.close()

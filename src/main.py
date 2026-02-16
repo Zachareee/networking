@@ -3,9 +3,6 @@ from yaml import load, Loader
 
 from networking.node import Node
 from networking.wire import Wire
-# from networking.frames import MAC_frame
-
-# print(MAC_frame.from_bytes(bytes(Node("al", 0x5).rcv_MAC_frame())))
 
 with open("config.yaml") as f:
     data = load(f.read(), Loader)
@@ -15,7 +12,9 @@ if len(argv) < 3:
     exit(1)
 
 if argv[1] == "node":
-    Node(data["nodes"][argv[2]]).rcv_MAC_frame()
+    Node(data["nodes"][argv[2]]).send_MAC_frame(
+        "N2", input("Enter your message: "))
+
 
 if argv[1] == "wire":
-    Wire(data["wires"][int(argv[2])], data["nodes"])
+    Wire(data["wires"][int(argv[2])], data["nodes"]).forward()
