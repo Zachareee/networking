@@ -17,15 +17,16 @@ class Node:
     __socket: socket.SocketType
 
     def rcv_MAC_frame(self) -> MAC_frame:
-        frame = MAC_frame.from_bytes(self.__socket.recv(1000))
-        if frame.destination != self.MAC:
-            return None
+        while True:
+            data = self.__socket.recv(1000)
+            frame = MAC_frame.from_bytes(data)
+            if frame.destination != self.MAC:
+                continue
 
-        print("\r", end="")
-        self.__logger.info(f"rcving {frame.data} from {
-            frame.source} to {frame.destination}")
-        print("Enter your message: ")
-        return frame
+            print(end="\r")
+            self.__logger.info(f"rcving {frame.data} from {
+                frame.source} to {frame.destination}")
+            print("\nEnter your message: ", end="")
 
     def send_MAC_frame(self, dst: MACaddr, data: str):
         self.__logger.info(f"sending {data} from {self.MAC} to {dst}")

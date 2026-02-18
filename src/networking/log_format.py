@@ -31,14 +31,6 @@ class CustomFormatter(logging.Formatter):
         return formatter.format(record)
 
 
-handler = logging.StreamHandler()
-handler.setFormatter(CustomFormatter())
-logging.basicConfig(
-    level=logging.DEBUG,
-    handlers=[handler]
-)
-
-
 def create_logger(name: str, level=logging.DEBUG) -> logging.Logger:
     handler = logging.StreamHandler()
     handler.setLevel(level)

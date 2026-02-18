@@ -13,9 +13,11 @@ if len(argv) < 3:
 
 if argv[1] == "node":
     n = Node(config["nodes"][argv[2]])
-    data = input("Enter your message: ")
-    idx = data.find(" ")
-    n.send_MAC_frame(data[:idx], data[idx+1:])
+
+    while True:
+        data = input("Enter your message: ")
+        idx = data.find(" ")
+        n.send_MAC_frame(data[:idx], data[idx+1:])
 
 if argv[1] == "wire":
     Wire(config["wires"][int(argv[2])], config["nodes"]).forward()

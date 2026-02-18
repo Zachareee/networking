@@ -21,6 +21,7 @@ class Wire:
             for sock in self.__map.values():
                 try:
                     msg = sock.recv(1000)
+                    logger.info(f"sending message {msg}")
                     self._broadcast(msg)
                 except TimeoutError:
                     pass
