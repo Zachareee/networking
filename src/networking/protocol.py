@@ -1,14 +1,18 @@
 from typing import TypeIs, TypedDict
 
+MACaddr = str
+IPaddr = int
+
 
 class NodeConfig(TypedDict):
-    MAC: str
-    IP: int
+    MAC: MACaddr
+    IP: IPaddr
     port: int
-
-
-MACaddr = str
 
 
 def _valid_MAC(MAC: str) -> TypeIs[MACaddr]:
     return isinstance(MAC, str) and len(MAC) == 2
+
+
+def _valid_IP(IP: int) -> TypeIs[IPaddr]:
+    return isinstance(IP, int) and IP > 0 and IP < 256
