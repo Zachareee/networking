@@ -7,7 +7,11 @@ IPaddr = int
 class NodeConfig(TypedDict):
     MAC: MACaddr
     IP: IPaddr
-    port: int
+    wire: str
+
+
+HOSTNAME = "127.0.0.1"
+MACaddr = str
 
 
 def _valid_MAC(MAC: str) -> TypeIs[MACaddr]:
