@@ -1,4 +1,4 @@
-from typing import TypedDict
+from typing import TypeIs, TypedDict
 
 
 class NodeConfig(TypedDict):
@@ -10,5 +10,5 @@ class NodeConfig(TypedDict):
 MACaddr = str
 
 
-def _valid_MAC(MAC: str) -> bool:
+def _valid_MAC(MAC: str) -> TypeIs[MACaddr]:
     return isinstance(MAC, str) and len(MAC) == 2

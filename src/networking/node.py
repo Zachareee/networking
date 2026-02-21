@@ -24,7 +24,7 @@ class Node:
                 continue
 
             print(end="\r")
-            self.__logger.info(f"rcving {frame.data} from {frame.source} to {frame.destination}")
+            self.__logger.info(f"rcving {frame.data} from {frame.source} to {frame.destination}")  # noqa
             print("\nEnter your message: ", end="")
 
     def send_MAC_frame(self, dst: MACaddr, data: str):
